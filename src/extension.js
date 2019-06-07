@@ -1,35 +1,26 @@
-// The module 'vscode' contains the VS Code extensibility API
-// Import the module and reference it with the alias vscode in your code below
-const vscode = require('vscode');
+// import * as vscode from 'vscode'
+const vscode = require('vscode')
+const colorfulBackground = require('./colorfulBackground.js')
+// import * as colorfulBackground from './colorfulBackground.js'
 
-// this method is called when your extension is activated
-// your extension is activated the very first time the command is executed
-
-/**
- * @param {vscode.ExtensionContext} context
- */
 function activate(context) {
-
-	// Use the console to output diagnostic information (console.log) and errors (console.error)
-	// This line of code will only be executed once when your extension is activated
-	console.log('Congratulations, your extension "colorful-background" is now active!');
-
-	// The command has been defined in the package.json file
-	// Now provide the implementation of the command with  registerCommand
-	// The commandId parameter must match the command field in package.json
-	let disposable = vscode.commands.registerCommand('extension.helloWorld', function () {
-		// The code you place here will be executed every time your command is executed
-
-		// Display a message box to the user
-		vscode.window.showInformationMessage('Hello World!');
-	});
-
-	context.subscriptions.push(disposable);
+	console.log('active')
+	vscode.window.showInformationMessage('active')
+	context.subscriptions.push(vscode.commands.registerCommand('extension.installColorfulBackground', () => {
+		console.log('安装')
+		vscode.window.showInformationMessage('安装')
+		colorfulBackground.init()
+		vscode.window.showInformationMessage('installColorfulBackground')
+	}))
+	context.subscriptions.push(vscode.commands.registerCommand('extension.uninstallColorfulBackground', () => {
+		console.log('卸载')
+		vscode.window.showInformationMessage('uninstallColorfulBackground')
+	}))
 }
-exports.activate = activate;
 
-// this method is called when your extension is deactivated
-function deactivate() {}
+function deactivate() {
+
+}
 
 module.exports = {
 	activate,

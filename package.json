@@ -2,28 +2,46 @@
 	"name": "colorful-background",
 	"displayName": "colorful-background",
 	"description": "Make your background colorful!",
+	"keywords": ["background", "colorful", "color"],
 	"version": "0.0.1",
 	"engines": {
 		"vscode": "^1.17.0"
 	},
 	"categories": [
-		"Other"
+		"Other",
+		"Themes"
 	],
 	"activationEvents": [
-		"onCommand:extension.helloWorld"
+		"*"
 	],
 	"main": "./src/extension.js",
 	"contributes": {
 		"commands": [
 			{
-				"command": "extension.helloWorld",
-				"title": "Hello World"
+				"command": "extension.installColorfulBackground",
+				"title": "Install Colorful Background"
+			}, 
+			{
+        "command": "extension.uninstallColorfulBackground",
+        "title": "Uninstall Colorful Background"
+      }
+		],
+		"configuration": {
+			"type": "Object",
+			"title": "Colorful Background Config 配置",
+			"properties": {
+				"colorfulBackground.enabled": {
+					"type": "boolean",
+					"default": true,
+					"description": "Colorful Background enabled 插件是否启用"
+				}
 			}
-		]
+		}
 	},
 	"scripts": {
 		"postinstall": "node ./node_modules/vscode/bin/install",
-		"test": "node ./node_modules/vscode/bin/test"
+		"test": "node ./node_modules/vscode/bin/test",
+		"vscode:uninstall": "node ./src/uninstall"
 	},
 	"devDependencies": {
 		"typescript": "^3.3.1",
