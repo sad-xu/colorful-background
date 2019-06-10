@@ -13,17 +13,20 @@ const vscode = require('vscode')
  *  剔除新增代码
  * 
  */
+const CSS_PATH = path.join(path.dirname(require.main.filename), 'vs', 'workbench', 'workbench.main.css')
+
+function clearCssContent(cssContent) {
+  if (cssContent.indexOf('colorful-background-start') >= 0) {
+    return cssContent.replace(/\/\*colorful-background-start\*\/[\s\S]*?\/\*colorful-background-end\*\//g, '')
+  } else return cssContent
+}
 
 function init() {
   // const CONFIG = vscode.workspace.getConfiguration('colorfulBackground')
   // console.log(CONFIG)
-  const CSS_PATH = path.join(path.dirname(require.main.filename), 'vs', 'workbench', 'workbench.main.css')
-  console.log(CSS_PATH)
   let cssContent = fs.readFileSync(CSS_PATH, 'utf-8')
   // 1. 清除历史样式
-  if (cssContent.indexOf('colorful-background-start') >= 0) {
-    cssContent = cssContent.replace(/\/\*colorful-background-start\*\/[\s\S]*?\/\*colorful-background-end\*\//g, '')
-  }
+  cssContent = clearCssContent(cssContent)
   // 2. 生成新样式
   let newCss = 'background: linear-gradient(-45deg,#ee7752,#e73c7e,#23a6d5,#23d5ab);background-size: 400% 400%;animation: xhc-diy-animation 15s ease infinite;'
   // 3. 添加新样式
@@ -36,6 +39,14 @@ function init() {
   vscode.commands.executeCommand('workbench.action.reloadWindow')
 }
 
+function uninstall() {
+  let cssContent = fs.readFileSync(CSS_PATH, 'utf-8')
+  cssContent = clearCssContent(cssContent)
+  fs.writeFileSync(CSS_PATH, cssContent, 'utf-8')
+  vscode.commands.executeCommand('workbench.action.reloadWindow')
+}
+
 module.exports = {
-  init
+  init,
+  uninstall
 }

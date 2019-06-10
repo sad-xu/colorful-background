@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+  <title>test</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+    #box {
+      box-sizing: border-box;
+      padding: 20px;
+      width: 100vw;
+      height: 100vh;
+      background: linear-gradient(-45deg,#ee7752,#e73c7e,#23a6d5,#23d5ab);
+      background-size: 400% 400%;
+      animation: xhc-diy-animation 15s ease infinite;
+    }
+    p {
+      line-height: 32px;
+      color: #fff;
+      z-index: 9;
+    }
+    p.active {
+      background-color: #607d8b;
+    }
+    @keyframes xhc-diy-animation { 
+      0% { background-position: 0% 50% } 
+      50% { background-position: 100% 50% } 
+      100% { background-position: 0% 50% } 
+    }
+  </style>
+</head>
+<body>
+  <div id="box">
+    <p>CODE LINE</p>
+    <p class="active">LINE 1212</p>
+    <p>aabbcc gj</p>
+  </div>
+</body>
+</html>

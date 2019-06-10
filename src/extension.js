@@ -14,6 +14,7 @@ function activate(context) {
 	}))
 	context.subscriptions.push(vscode.commands.registerCommand('extension.uninstallColorfulBackground', () => {
 		console.log('卸载')
+		colorfulBackground.uninstall()
 		vscode.window.showInformationMessage('uninstallColorfulBackground')
 	}))
 }

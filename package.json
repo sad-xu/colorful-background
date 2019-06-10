@@ -2,7 +2,11 @@
 	"name": "colorful-background",
 	"displayName": "colorful-background",
 	"description": "Make your background colorful!",
-	"keywords": ["background", "colorful", "color"],
+	"keywords": [
+		"background",
+		"colorful",
+		"color"
+	],
 	"version": "0.0.1",
 	"engines": {
 		"vscode": "^1.17.0"
@@ -20,11 +24,11 @@
 			{
 				"command": "extension.installColorfulBackground",
 				"title": "Install Colorful Background"
-			}, 
+			},
 			{
-        "command": "extension.uninstallColorfulBackground",
-        "title": "Uninstall Colorful Background"
-      }
+				"command": "extension.uninstallColorfulBackground",
+				"title": "Uninstall Colorful Background"
+			}
 		],
 		"configuration": {
 			"type": "Object",
@@ -44,10 +48,16 @@
 		"vscode:uninstall": "node ./src/uninstall"
 	},
 	"devDependencies": {
-		"typescript": "^3.3.1",
-		"vscode": "^1.1.28",
-		"eslint": "^5.13.0",
+		"@types/mocha": "^2.2.42",
 		"@types/node": "^10.12.21",
-		"@types/mocha": "^2.2.42"
+		"cz-conventional-changelog": "^2.1.0",
+		"eslint": "^5.13.0",
+		"typescript": "^3.3.1",
+		"vscode": "^1.1.28"
+	},
+	"config": {
+		"commitizen": {
+			"path": "./node_modules/cz-conventional-changelog"
+		}
 	}
 }
