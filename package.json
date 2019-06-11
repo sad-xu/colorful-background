@@ -34,10 +34,56 @@
 			"type": "Object",
 			"title": "Colorful Background Config 配置",
 			"properties": {
-				"colorfulBackground.enabled": {
+				"colorfulBackground.animate": {
+					"description": "enabled animate  是否启用动态背景",
 					"type": "boolean",
-					"default": true,
-					"description": "Colorful Background enabled 插件是否启用"
+					"default": true
+				},
+				"colorfulBackground.duration": {
+					"description": "animate duration/s 背景变化速度/秒",
+					"type": "number",
+					"default": 5
+				},
+				"colorfulBackground.timingFunction": {
+					"description": "animation timingFunction 背景变化速度曲线",
+					"type": "string",
+					"default": "ease",
+					"enum": [
+						"ease",
+						"ease-in",
+						"ease-out",
+						"ease-in-out",
+						"linear"
+					],
+					"enumDescriptions": [
+            "xxxx",
+						"nothing to say",
+						"aaa",
+						"bbb",
+						"ccc"
+          ]
+				},
+				"colorfulBackground.rotate": {
+					"description": "background rotate 背景颜色分布角度",
+					"type": "number",
+					"default": -45
+				},
+				"colorfulBackground.mode": {
+					"description": "color mode 预设配色方案",
+					"type": "string",
+					"default": "DeepSpace",
+					"enum": [
+						"DeepSpace",
+						"ServQuick",
+						"MidnightCity",
+						"Anwar",
+						"NoontoDusk"
+					]
+				},
+				"colorfulBackground.colors": {
+					"description": "colors 背景颜色列表 待定",
+					"type": "array",
+					"default": ["#ee7752","#e73c7e","#23a6d5","#23d5ab"]
 				}
 			}
 		}
