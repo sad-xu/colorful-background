@@ -30,10 +30,10 @@ function clearCssContent(cssContent) {
  */
 const COLOR_MAP = {
   'DeepSpace': '#000000, #434343',
-  'ServQuick': '#485563, #29323c',
   'MidnightCity': '#232526, #414345',
   'Anwar': '#334d50, #cbcaa5',
-  'NoontoDusk': '#ff6e7f, #bfe9ff'
+  'NoontoDusk': '#ff6e7f, #bfe9ff',
+  'Transfile': '#16bffd80, #cb306680'
 }
 
 function generateStyle({
@@ -41,18 +41,48 @@ function generateStyle({
   duration = 15,
   timingFunction = 'ease',
   rotate = -45,
-  mode = ''
-  // colors
+  opacity = 0.5,
+  mode = 'DeepSpace',
+  diyColors = [],
+  diyBackgroundCss = ''
 }) {
   let style = ''
   let colors = ''
-  if (COLOR_MAP[mode]) colors = COLOR_MAP[mode]
-  style += `background: linear-gradient(${rotate}deg, ${colors});`
-  if (animate) {
-    style += `background-size: 400% 400%;`
-      + `animation: xhc-diy-animation ${duration}s ${timingFunction} infinite;`
+  // set css - background
+  if (diyBackgroundCss.length) {
+    style = `background-image:${diyBackgroundCss}`
+  } else if (diyColors.length) {
+    colors = diyColors.join(',')
+  } else {
+    if (COLOR_MAP[mode]) colors = colorFormat(COLOR_MAP[mode], opacity)
+    style = `background-image: linear-gradient(${rotate}deg, ${colors});`
   }
+  // set animate
+  if (animate) {
+    style += `background-size: 200% 200%;`
+      + `animation: xhc-diy-animation ${duration}s ${timingFunction} infinite;`
+  } else {
+    // style += 'background-size: cover;'
+  }
+  console.log(style)
   return style
+}
+
+/**
+ * Add opacity and change color code style
+ * 
+ * 
+ */
+function colorFormat(code, opacity) {
+  console.log(code, opacity)
+  // if () { // hex
+
+  // } else if () { // rgb
+
+  // } else if () { // hsl
+
+  // } else 
+  return code
 }
 
 
@@ -60,18 +90,16 @@ function init() {
   const CONFIG = vscode.workspace.getConfiguration('colorfulBackground')
   console.log(CONFIG)
 
-
   let cssContent = fs.readFileSync(CSS_PATH, 'utf-8')
   // 1. 清除历史样式
   cssContent = clearCssContent(cssContent)
   // 2. 生成新样式
-  let newCss = generateStyle(CONFIG) // 'background: linear-gradient(-45deg,#ee7752,#e73c7e,#23a6d5,#23d5ab);background-size: 400% 400%;animation: xhc-diy-animation 15s ease infinite;'
+  let newCss = generateStyle(CONFIG)
   // 3. 添加新样式
   cssContent += `/*colorful-background-start*/`
   + `[id="workbench.parts.editor"] .split-view-view .editor-container .overflow-guard>.monaco-scrollable-element>.monaco-editor-background{${newCss}}`
   + `@-webkit-keyframes xhc-diy-animation { 0%{background-position: 0% 50%} 50%{background-position: 100% 50%} 100%{background-position: 0% 50%} }`
   + `/*colorful-background-end*/`
-  console.log(cssContent.slice(-100))
   fs.writeFileSync(CSS_PATH, cssContent, 'utf-8')
   vscode.commands.executeCommand('workbench.action.reloadWindow')
 }

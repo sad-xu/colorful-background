@@ -68,22 +68,32 @@
 					"type": "number",
 					"default": -45
 				},
+				"colorfulBackground.opacity": {
+					"description": "all background color opacity 背景透明度 [0, 1]",
+					"type": "number",
+					"default": 0.5
+				},
 				"colorfulBackground.mode": {
 					"description": "color mode 预设配色方案",
 					"type": "string",
 					"default": "DeepSpace",
 					"enum": [
 						"DeepSpace",
-						"ServQuick",
 						"MidnightCity",
 						"Anwar",
-						"NoontoDusk"
+						"NoontoDusk",
+						"Transfile"
 					]
 				},
-				"colorfulBackground.colors": {
-					"description": "colors 背景颜色列表 待定",
+				"colorfulBackground.diyColors": {
+					"description": "colors list 自定义背景颜色列表 exp: `colorfulBackground.diyColors: ['#23a6d5','#23d5ab']`",
 					"type": "array",
-					"default": ["#ee7752","#e73c7e","#23a6d5","#23d5ab"]
+					"default": []
+				},
+				"colorfulBackground.diyBackgroundCss": {
+					"description": "diy css of background 自定义背景样式 exp: `linear-gradient(45deg, rgba(255,0,0,.8), rgba(255,0,0,0))`",
+					"type": "string",
+					"default": ""
 				}
 			}
 		}
