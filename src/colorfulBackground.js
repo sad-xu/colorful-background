@@ -3,6 +3,7 @@
 const path = require('path')
 const fs = require('fs')
 const vscode = require('vscode')
+const utils = require('./utils.js')
 
 /**
  * 安装：
@@ -37,8 +38,7 @@ const COLOR_MAP = {
 }
 
 function generateStyle({
-  animate = true,
-  duration = 15,
+  duration = 5,
   timingFunction = 'ease',
   rotate = -45,
   opacity = 0.5,
@@ -54,37 +54,15 @@ function generateStyle({
   } else if (diyColors.length) {
     colors = diyColors.join(',')
   } else {
-    if (COLOR_MAP[mode]) colors = colorFormat(COLOR_MAP[mode], opacity)
+    if (COLOR_MAP[mode]) colors = utils.colorFormat(COLOR_MAP[mode], opacity)
     style = `background-image: linear-gradient(${rotate}deg, ${colors});`
   }
   // set animate
-  if (animate) {
-    style += `background-size: 200% 200%;`
-      + `animation: xhc-diy-animation ${duration}s ${timingFunction} infinite;`
-  } else {
-    // style += 'background-size: cover;'
-  }
+  style += `background-size: 200% 200%;`
+    + `animation: xhc-diy-animation ${duration}s ${timingFunction} infinite;`
   console.log(style)
   return style
 }
-
-/**
- * Add opacity and change color code style
- * 
- * 
- */
-function colorFormat(code, opacity) {
-  console.log(code, opacity)
-  // if () { // hex
-
-  // } else if () { // rgb
-
-  // } else if () { // hsl
-
-  // } else 
-  return code
-}
-
 
 function init() {
   const CONFIG = vscode.workspace.getConfiguration('colorfulBackground')

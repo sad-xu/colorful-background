@@ -34,11 +34,6 @@
 			"type": "Object",
 			"title": "Colorful Background Config 配置",
 			"properties": {
-				"colorfulBackground.animate": {
-					"description": "enabled animate  是否启用动态背景",
-					"type": "boolean",
-					"default": true
-				},
 				"colorfulBackground.duration": {
 					"description": "animate duration/s 背景变化速度/秒",
 					"type": "number",
