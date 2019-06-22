@@ -46,22 +46,24 @@ function generateStyle({
   diyColors = [],
   diyBackgroundCss = ''
 }) {
-  let style = ''
+  let background, animate
   let colors = ''
   // set css - background
   if (diyBackgroundCss.length) {
-    style = `background-image:${diyBackgroundCss}`
+    background = `background-image:${diyBackgroundCss}`
   } else if (diyColors.length) {
     colors = diyColors.join(',')
   } else {
     if (COLOR_MAP[mode]) colors = utils.colorFormat(COLOR_MAP[mode], opacity)
-    style = `background-image: linear-gradient(${rotate}deg, ${colors});`
+    background = `background-image: linear-gradient(${rotate}deg, ${colors}) !important;`
   }
   // set animate
-  style += `background-size: 200% 200%;`
-    + `animation: xhc-diy-animation ${duration}s ${timingFunction} infinite;`
-  console.log(style)
-  return style
+  // background += ``
+  animate = `background-size: 200% 200%;animation: xhc-diy-animation ${duration}s ${timingFunction} infinite;`
+  return {
+    background,
+    animate
+  }
 }
 
 function init() {
@@ -72,12 +74,45 @@ function init() {
   // 1. 清除历史样式
   cssContent = clearCssContent(cssContent)
   // 2. 生成新样式
-  let newCss = generateStyle(CONFIG)
+  let { background, animate } = generateStyle(CONFIG)
   // 3. 添加新样式
   cssContent += `/*colorful-background-start*/`
-  + `[id="workbench.parts.editor"] .split-view-view .editor-container .overflow-guard>.monaco-scrollable-element>.monaco-editor-background{${newCss}}`
+  + `.monaco-workbench .part,`
+  + `.monaco-list .monaco-list-row.selected,`
+  + `.monaco-panel-view .panel>.panel-header,`
+  + `.monaco-breadcrumbs,`
+  + `.monaco-editor .margin,`
+  + `.monaco-editor .minimap-slider,`
+  + `.monaco-workbench .part.editor>.content .editor-group-container>.title` 
+  + `{${background}}`
+  + `.monaco-editor-background`
+  + `{${background + animate}}`
+
+
+  // 左,上,下区域 .monaco-workbench .part
+  // 左侧选中文件 .monaco-list .monaco-list-row.selected
+  // 左侧其他区域 .monaco-panel-view .panel>.panel-header
+  // 上方文件目录右侧 .monaco-workbench .part.editor>.content .editor-group-container>.title
+  // 中上文件路径 .monaco-breadcrumbs
+  // 左侧行数区域  .overflow-guard .margin // 
+  // 右侧滑块 .monaco-editor .minimap.slider-mouseover .minimap-slider // 
+
+  // 编辑区背景 .monaco-editor-background
+
+
+  // 选中行颜色 .monaco-editor .selected-text
+  // 当前行颜色 .monaco-editor .view-overlays .current-line
+  // 右上方区域 - 被覆盖.editor-group-container>.tabs
+
+
+  // 切换文件瞬间闪现
+  // + `.editor-container { background-color: green !important; }`
+  // 无用
+  // + `.monaco-workbench>.part.editor>.container { background-color: pink !important; }`
+  // + `.extension-editor { background-color: pink !important; }`
   + `@-webkit-keyframes xhc-diy-animation { 0%{background-position: 0% 50%} 50%{background-position: 100% 50%} 100%{background-position: 0% 50%} }`
   + `/*colorful-background-end*/`
+  console.log('csscontent: ', cssContent)
   fs.writeFileSync(CSS_PATH, cssContent, 'utf-8')
   vscode.commands.executeCommand('workbench.action.reloadWindow')
 }
