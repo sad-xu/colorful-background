@@ -1,13 +1,19 @@
 {
 	"name": "colorful-background",
-	"displayName": "colorful-background",
+	"displayName": "Colorful Background",
 	"description": "Make your background colorful!",
+	"version": "0.1.1",
+	"publisher": "pihaqiu",
 	"keywords": [
 		"background",
 		"colorful",
 		"color"
 	],
-	"version": "0.0.1",
+	"author": {
+    "name": "sad-xu",
+    "email": "1031568754@qq.com",
+    "url": "https://github.com/sad-xu"
+	},
 	"engines": {
 		"vscode": "^1.17.0"
 	},
@@ -15,6 +21,15 @@
 		"Other",
 		"Themes"
 	],
+	"repository": {
+    "type": "git",
+    "url": "git+https://github.com/sad-xu/colorful-background.git"
+	},
+	"bugs": {
+    "url": "https://github.com/sad-xu/colorful-background/issues"
+	},
+	"preview": true,
+	"icon": "icon.png",
 	"activationEvents": [
 		"*"
 	],
@@ -26,14 +41,31 @@
 				"title": "Install Colorful Background"
 			},
 			{
-				"command": "extension.uninstallColorfulBackground",
-				"title": "Uninstall Colorful Background"
+				"command": "extension.resetColorfulBackground",
+				"title": "Reset Colorful Background"
 			}
 		],
 		"configuration": {
 			"type": "Object",
 			"title": "Colorful Background Config 配置",
 			"properties": {
+				"colorfulBackground.mode": {
+					"description": "color mode 预设配色方案",
+					"type": "string",
+					"default": "Dark-DeepSpace",
+					"enum": [
+						"Dark-DeepSpace",
+						"Dark-MidnightCity",
+						"Light-NoontoDusk",
+						"Light-Hazel",
+						"diy"
+					]
+				},
+				"colorfulBackground.diyColors": {
+					"description": "diyColors 自定义背景颜色列表 exp: `#23a6d5,#23d5ab",
+					"type": "string",
+					"default": ""
+				},
 				"colorfulBackground.duration": {
 					"description": "animate duration/s 背景变化速度/秒",
 					"type": "number",
@@ -51,44 +83,17 @@
 						"linear"
 					],
 					"enumDescriptions": [
-            "xxxx",
-						"nothing to say",
-						"aaa",
-						"bbb",
-						"ccc"
+            "I",
+						"need",
+						"someone",
+						"to",
+						"accompany"
           ]
 				},
 				"colorfulBackground.rotate": {
 					"description": "background rotate 背景颜色分布角度",
 					"type": "number",
-					"default": -45
-				},
-				"colorfulBackground.opacity": {
-					"description": "all background color opacity 背景透明度 [0, 1]",
-					"type": "number",
-					"default": 0.5
-				},
-				"colorfulBackground.mode": {
-					"description": "color mode 预设配色方案",
-					"type": "string",
-					"default": "DeepSpace",
-					"enum": [
-						"DeepSpace",
-						"MidnightCity",
-						"Anwar",
-						"NoontoDusk",
-						"Transfile"
-					]
-				},
-				"colorfulBackground.diyColors": {
-					"description": "colors list 自定义背景颜色列表 exp: `colorfulBackground.diyColors: ['#23a6d5','#23d5ab']`",
-					"type": "array",
-					"default": []
-				},
-				"colorfulBackground.diyBackgroundCss": {
-					"description": "diy css of background 自定义背景样式 exp: `linear-gradient(45deg, rgba(255,0,0,.8), rgba(255,0,0,0))`",
-					"type": "string",
-					"default": ""
+					"default": 135
 				}
 			}
 		}
@@ -96,7 +101,7 @@
 	"scripts": {
 		"postinstall": "node ./node_modules/vscode/bin/install",
 		"test": "node ./node_modules/vscode/bin/test",
-		"vscode:uninstall": "node ./src/uninstall"
+		"vscode:uninstall": "node ./src/uninstall.js"
 	},
 	"devDependencies": {
 		"@types/mocha": "^2.2.42",

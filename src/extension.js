@@ -1,18 +1,14 @@
-// import * as vscode from 'vscode'
 const vscode = require('vscode')
 const colorfulBackground = require('./colorfulBackground.js')
-// import * as colorfulBackground from './colorfulBackground.js'
 
 function activate(context) {
-	console.log('active')
-	vscode.window.showInformationMessage('active')
 	context.subscriptions.push(vscode.commands.registerCommand('extension.installColorfulBackground', () => {
 		colorfulBackground.init()
-		vscode.window.showInformationMessage('installColorfulBackground')
+		vscode.window.showInformationMessage('install colorful background')
 	}))
-	context.subscriptions.push(vscode.commands.registerCommand('extension.uninstallColorfulBackground', () => {
-		colorfulBackground.uninstall()
-		vscode.window.showInformationMessage('uninstallColorfulBackground')
+	context.subscriptions.push(vscode.commands.registerCommand('extension.resetColorfulBackground', () => {
+		colorfulBackground.reset()
+		vscode.window.showInformationMessage('reset colorful background')
 	}))
 }
 
