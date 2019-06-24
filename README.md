@@ -8,7 +8,11 @@ GitHub: [https://github.com/sad-xu/colorful-background](https://github.com/sad-x
 
 ![](./assets/exp.gif)
 
+Dark-MidnightCity
+
 ![](./assets/dark-exp.gif)
+
+Light-Hazel
 
 ![](./assets/light-exp.gif)
 
