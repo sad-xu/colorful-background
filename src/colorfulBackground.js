@@ -45,7 +45,7 @@ function generateStyle({
   const baseColor = colors.split(',')[0]
   let baseBackground = `background-color: ${baseColor} !important;`
   let linearBackground = `background-image: linear-gradient(${rotate}deg, ${colors}) !important;`
-  let animate = `background-size: 200% 200%;animation: xhc-diy-animation ${duration}s ${timingFunction} infinite;`
+  let animate = `background-size: 1000% 100%;animation: xhc-diy-animation ${duration}s ${timingFunction} infinite;`
   return {
     baseBackground,
     linearBackground,

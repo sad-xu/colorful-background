@@ -8,6 +8,9 @@ GitHub: [https://github.com/sad-xu/colorful-background](https://github.com/sad-x
 
 ![](./assets/exp.gif)
 
+![](./assets/dark-exp.gif)
+
+![](./assets/light-exp.gif)
 
 ## How to install
 
@@ -43,5 +46,11 @@ GitHub: [https://github.com/sad-xu/colorful-background](https://github.com/sad-x
 
 > **This extension works by editting the vscode's css file.**  
 > So, a information appears while the first time to install or vscode update.U can click the [never show again] to avoid it.
+
+## Thanks
+
+Thanks [shalldie](https://github.com/shalldie/vscode-background)
+
+I learned a lot from your code
 
 **Enjoy!**
